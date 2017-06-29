@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  </head>
+  <body>
+	<form id="contactForm1" action="/your_url" method="post">
+    <!-- Form input fields here (do not forget your name attributes). -->
+  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+  <input type="checkbox" name="vehicle" value="Car" checked> I have a car<br>
+	<input type="submit" value="Submit"> <br>
+
+	</form>
+  </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    var frm = $('#contactForm1');
+
+    frm.submit(function (e) {
+		alert($(this).serialize());
+        e.preventDefault();
+		
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+</script>
+</html>
